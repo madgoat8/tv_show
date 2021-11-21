@@ -5,9 +5,13 @@
 			<text class="title" v-bind:style="{'font-size':currentData.titlefontsize+'vw'}">{{currentData.title}}</text>
 		</view>
 		<ul>
-			<li v-for="(item,index) in currentData.Content" :key=index v-bind:style="{'font-size':item.fontsize+'vw','line-height':item.fontsize+3+'vw'}">
-				<div class="rowName">{{item.name}}：</div>
-				<div class="rowValue">{{item.value}}</div>
+			<li v-for="(item,index) in currentData.Content" :key=index
+				v-bind:style="{'font-size':item.fontsize+'vw','line-height':item.fontsize+3+'vw'}">
+				<div class="rowName"><span v-html="item.name"></span></div>
+				<div class="rowValue">
+					<!-- {{item.value}} -->
+					<span v-html="item.value"></span>
+				</div>
 			</li>
 			<!-- <li>
 				<div class="rowName">牌&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</div>
@@ -288,7 +292,7 @@
 			start() {
 				let that = this
 				that.checkOpenSocket()
-				
+
 				this.timeoutObj = setInterval(function() {
 					that.checkOpenSocket()
 				}, this.timeout);
@@ -317,10 +321,10 @@
 </script>
 <style>
 	.content {
-		display: flex;
+		/* display: flex;
 		flex-direction: column;
 		align-items: center;
-		justify-content: center;
+		justify-content: center; */
 		width: 100%;
 		height: 100%;
 		/* background-color: #000; */
@@ -337,8 +341,8 @@
 
 	ul {
 		width: 100%;
-		margin:0;
-		padding:0;
+		margin: 0;
+		padding: 0;
 	}
 
 	li {
@@ -347,8 +351,8 @@
 		/* margin:2vw; */
 		font-size: 2vw;
 		/* color: #505050; */
-		margin:0;
-		padding:0 10rpx 0 10rpx;
+		margin: 0;
+		padding: 0 10rpx 0 10rpx;
 		overflow: hidden;
 	}
 

@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 let msgObj = {
   'backgroundcolor': 'black',
   'title': '分道系统',
-  'titlefontsize': 15,
+  'titlefontsize': 10,
   'titlerowindex': 0,
   'fontcolor': 'white',
   'Content':
@@ -16,24 +16,24 @@ let msgObj = {
         'name': '条码',
         'value': '1234567890123456789012345678901234567890',
         'rowindex': 2,
-        'fontsize': 4
+        'fontsize': 2
       },
       {
-        'name': '牌号',
+        'name': '牌号:',
         'value': '娇子',
         'rowindex': 1,
-        'fontsize': 4
+        'fontsize': 2
       },
       {
         'name': '采集时间',
         'value': '2021 - 08 - 08 12: 12: 12',
         'rowindex': 3,
-        'fontsize': 4
+        'fontsize': 2
       },{
         'name': '条码2',
         'value': '1234567890123456789012345678901234567890',
         'rowindex': 2,
-        'fontsize': 4
+        'fontsize': 2
       }
     ]
 }
@@ -42,13 +42,13 @@ var server = ws.createServer(function (socket) {
   console.log("New connection")
 
   let intervalObj=setInterval(function () {
-    msgObj.Content[0].value = uuidv4().substr(0,34)
-    msgObj.Content[1].value = '中华中华中华中华中华中华' + Math.floor((Math.random() * 1000) + 1);
+    msgObj.Content[0].value = uuidv4().substr(0,34)+"&nbsp;&nbsp;&nbsp;"
+    msgObj.Content[1].value = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中华中华中华中华中华中华' + Math.floor((Math.random() * 1000) + 1);
 
     msgObj.Content[2].value = formatDate(new Date(), "yyyy-MM-dd hh:mm:ss")
     // console.log(socket.readyState)
     socket.sendText(JSON.stringify(msgObj))
-  }, 200, 'sendMockData');
+  }, 5000, 'sendMockData');
   // sendMockData(socket)
   // 事件名称为text(读取字符串时，就叫做text)，读取客户端传来的字符串
   var count = 1;
@@ -77,11 +77,13 @@ console.log("WebSocket建立完毕");
 
 
 function sendMockData (socket) {
-  msgObj.Content[0].value = uuidv4()
-  msgObj.Content[1].value = '中华' + Math.floor((Math.random() * 1000) + 1);
+  msgObj.Content[0].value = "    "+uuidv4()+"  "
+  msgObj.Content[1].value = '   中华' + Math.floor((Math.random() * 1000) + 1+"    ");
 
   msgObj.Content[2].value = formatDate(new Date(), "yyyy-MM-dd hh:mm:ss")
-  console.log(socket.readyState)
+  // console.log(socket.readyState)
+  console.log(JSON.stringify(msgObj))
+
   socket.sendText(JSON.stringify(msgObj))
 }
 
